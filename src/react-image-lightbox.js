@@ -60,16 +60,17 @@ class ReactImageLightbox extends Component {
   }
 
   // Request to transition to the previous image
-  static getTransform({ x = 0, y = 0, zoom = 1, width, targetWidth }) {
+  static getTransform({ x = 0, y = 0, zoom = 1, width, targetWidth, isRtl }) {
     let nextX = x;
     const windowWidth = getWindowWidth();
     if (width > windowWidth) {
       nextX += (windowWidth - width) / 2;
     }
     const scaleFactor = zoom * (targetWidth / width);
+    const rtlModifier = isRtl ? '-' : '';
 
     return {
-      transform: `translate3d(${nextX}px,${y}px,0) scale3d(${scaleFactor},${scaleFactor},1)`,
+      transform: `translate3d(${rtlModifier}${nextX}px,${y}px,0) scale3d(${scaleFactor},${scaleFactor},1)`,
     };
   }
 
@@ -1312,12 +1313,14 @@ class ReactImageLightbox extends Component {
         return;
       }
       const bestImageInfo = this.getBestImageForType(srcType);
+      const { isRtl } = this.props;
 
       const imageStyle = {
         ...transitionStyle,
         ...ReactImageLightbox.getTransform({
           ...transforms,
           ...bestImageInfo,
+          isRtl,
         }),
       };
 
@@ -1757,6 +1760,9 @@ ReactImageLightbox.propTypes = {
   zoomOutLabel: PropTypes.string,
   closeLabel: PropTypes.string,
 
+  // Direction
+  isRtl: PropTypes.bool,
+
   imageLoadErrorMessage: PropTypes.node,
 };
 
@@ -1792,6 +1798,7 @@ ReactImageLightbox.defaultProps = {
   wrapperClassName: '',
   zoomInLabel: 'Zoom in',
   zoomOutLabel: 'Zoom out',
+  isRtl: false,
   imageLoadErrorMessage: 'This image failed to load',
 };
 

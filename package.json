@@ -35,7 +35,9 @@
   ],
   "license": "MIT",
   "jest": {
-    "setupFilesAfterEnv": ["./node_modules/jest-enzyme/lib/index.js"],
+    "setupFilesAfterEnv": [
+      "./node_modules/jest-enzyme/lib/index.js"
+    ],
     "setupFiles": [
       "./test-config/shim.js",
       "./test-config/test-setup.js"
