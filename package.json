@@ -13,7 +13,8 @@
     "prepublishOnly": "npm run lint && npm run test && npm run build",
     "test": "jest",
     "test:watch": "jest --watchAll",
-    "deploy": "npm run build:demo && gh-pages -d build"
+    "deploy": "npm run build:demo && gh-pages -d build",
+    "prepare": "npm run build"
   },
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
