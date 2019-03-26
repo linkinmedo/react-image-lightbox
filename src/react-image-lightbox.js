@@ -64,13 +64,12 @@ class ReactImageLightbox extends Component {
     let nextX = x;
     const windowWidth = getWindowWidth();
     if (width > windowWidth) {
-      nextX += (windowWidth - width) / 2;
+      nextX += isRtl ? ((windowWidth - width) / 2) * -1 : (windowWidth - width) / 2;
     }
     const scaleFactor = zoom * (targetWidth / width);
-    const rtlModifier = isRtl ? '-' : '';
 
     return {
-      transform: `translate3d(${rtlModifier}${nextX}px,${y}px,0) scale3d(${scaleFactor},${scaleFactor},1)`,
+      transform: `translate3d(${nextX}px,${y}px,0) scale3d(${scaleFactor},${scaleFactor},1)`,
     };
   }
 
